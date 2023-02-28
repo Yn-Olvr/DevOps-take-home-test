@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: return-shifts
+  labels:
+    app: return-shifts
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      name: take-home-test-node
+  template:
+    metadata:
+      labels:
+        app: take-home-test-node
+    spec:
+      containers:
+      - name: return-users-container
+        image: jenkins/jenkins:lts
+        ports:
+        - containerPort: 9000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-service-shift
+spec:
+  selector:
+    app: return-shifts
+  ports:
+  - name: cont2-service-port
+    protocol: TCP
+    port: 9000
+    targetPort: 9000

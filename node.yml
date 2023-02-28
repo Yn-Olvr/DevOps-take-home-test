@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Node
+metadata:
+ name: take-home-test-node
+ labels: 
+  name: take-home-test-node
+    
+  
