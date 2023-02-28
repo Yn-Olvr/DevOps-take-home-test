@@ -17,7 +17,7 @@ spec:
   template:
     metadata:
       labels:
-        app: take-home-test-node
+        name: take-home-test-node
     spec:
       containers:
       - name: return-users-container
